@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>India Tour</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="header">
+        <h2>India Travels</h2>
+    </div>
+
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="poi.html">Popular In India</a></li>
+        <li><a href="events.html">Celebrate with Us</a></li>
+        <li><a href="explore.html">Explore India </a></li>
+        <li><a class="active" href="upload.html">Share your Memories</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+
+
+    </ul>
+    <center>
+        <h2>
+            Share your Memories
+        </h2>
+
+
+        <div class="container">
+            <form action="http://localhost:8081/uploadfile" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <input type="file" name="uploadfile" id="input-files" class="form-control-file border" />
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+
+            <div class="images">
+
+            </div>
+        </div>
+
+
+    </center>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script>
+        function displayBase64Image(placeholder, base64Image, id) {
+            $('<img>', {
+                src: base64Image
+            }).appendTo(placeholder);
+        }
+        $.getJSON('http://localhost:8081/images', function (data) {
+            data.forEach(element => {
+                displayBase64Image(".images", "data:" + element.type + ";base64," + element.data, element.id)
+            });
+        });
+    </script>
+</body>
+
+</html>
